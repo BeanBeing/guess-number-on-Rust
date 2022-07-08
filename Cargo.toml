@@ -1,5 +1,5 @@
 [package]
-name = "guess-number-on-Rust"
+name = "guess-number-on-rust"
 version = "0.1.0"
 edition = "2021"
 
