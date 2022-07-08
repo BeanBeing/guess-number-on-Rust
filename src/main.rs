@@ -1,11 +1,30 @@
+use rand::Rng;
+
 fn main() {
     println!("Guess the number!");
 
-    println!("Please input your guess.");
+    let secret_number = rand::thread_rng().gen_range(1..=100);
 
-    let mut guess = String::new();
+    println!("The secret number is: {secret_number}");
+    loop{
+        println!("Please input your guess.");
 
-    std::io::stdin().read_line(&mut guess).expect("Failed to read line");
+        let mut guess = String::new();
 
-    println!("You guessed: {guess}");
+        std::io::stdin().read_line(&mut guess).expect("Failed to read line");
+
+        let guess: u32 = guess.trim().parse().expect("Please put a number");
+
+        println!("You guessed: {guess}");
+
+        match guess.cmp(&secret_number)
+        {
+            std::cmp::Ordering::Less => println!("Higher"),
+            std::cmp::Ordering::Greater => println!("Lower"),
+            std::cmp::Ordering::Equal =>{
+                println!("You guessed it right!");
+                break;
+            }
+        }
+    }
 }
